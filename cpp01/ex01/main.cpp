@@ -21,4 +21,10 @@ int	main(void) {
 	for (int i = 0; i < n_zombie; i++)
 		horde[i].announce();
 	delete [] horde;
+	n_zombie = 0;
+	horde = zombieHorde(n_zombie, "None Zombie");
+	for (int i = 0; i < n_zombie; i++)
+		horde[i].announce();
+	delete [] horde;
+	return (0);
 }

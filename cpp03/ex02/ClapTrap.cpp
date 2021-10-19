@@ -48,15 +48,15 @@ ClapTrap const   &ClapTrap::operator=( ClapTrap const &other ) {
 void    ClapTrap::attack( std::string const & target ) {
     if (energy_points >= 10) {
         energy_points -= 10;
-        std::cout << name << " attack " << target 
+        std::cout << "ClapTrap " << name << " attack " << target 
         << ", causing " << attack_damage << " points of damage!"
         << std::endl
         << "Remaining energy (" << name << "): " << energy_points
         << std::endl;
     }
     else
-        std::cout << name << " doesn't have enough energy points to attack" << std::endl;
-
+        std::cout << "ClapTrap " << name << " doesn't have enough energy points to attack"
+        << std::endl;
 }
 
 void    ClapTrap::takeDamage( unsigned int amount ) {

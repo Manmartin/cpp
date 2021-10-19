@@ -3,10 +3,14 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap: public ClapTrap {
+class ScavTrap: public virtual ClapTrap {
 	private:
 
 	public:
+		static const unsigned int life;
+		static const unsigned int energy;
+		static const unsigned int damage;
+
 	/* Constructors and destructor */
 
 		ScavTrap( void );

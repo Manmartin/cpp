@@ -1,21 +1,23 @@
 #include "ScavTrap.hpp"
 
 /* Static  Variables*/
-
+    const unsigned int ScavTrap::life = 100;
+    const unsigned int ScavTrap::energy = 50;
+    const unsigned int ScavTrap::damage = 20;
 
 /* Constructors and Destructor */
 
 ScavTrap::ScavTrap( void ): ClapTrap() {
-    hitpoints = 100;
-    energy_points = 50;
-    attack_damage = 20;
+    hitpoints = life;
+    energy_points = energy;
+    attack_damage = damage;
     std::cout << "ScavTrap " << name << " has been created" << std::endl;
 }
 
 ScavTrap::ScavTrap( std::string name ): ClapTrap( name ) {
-    hitpoints = 100;
-    energy_points = 50;
-    attack_damage = 20;
+    hitpoints = life;
+    energy_points = energy;
+    attack_damage = damage;
     std::cout << "ScavTrap " << name << " has been created" << std::endl;
 }
 

@@ -42,6 +42,20 @@ ScavTrap const   &ScavTrap::operator=( ScavTrap const &other ) {
 
 /* Member Functions */
 
+void    ScavTrap::attack( std::string const & target ) {
+    if (energy_points >= 10) {
+        energy_points -= 10;
+        std::cout << "ScavTrap " << name << " attack " << target 
+        << ", causing " << attack_damage << " points of damage!"
+        << std::endl
+        << "Remaining energy (" << name << "): " << energy_points
+        << std::endl;
+    }
+    else
+        std::cout << "ScavTrap " << name << " doesn't have enough energy points to attack"
+        << std::endl;
+}
+
 void    ScavTrap::guardGate( void ) {
     std::cout << "ScavTrap " << name << " have entered in Gate keeper mode"
     << std::endl;

@@ -5,7 +5,7 @@
 
 void    read_file(std::string file, std::string s1, std::string s2)
 {
-	std::ifstream   		ifs(file, std::ios::in);
+	std::ifstream   		ifs(file.c_str(), std::ios::in);
 	std::string     		text;
 	std::string     		aux;
 	unsigned long		find_nb;
@@ -13,12 +13,12 @@ void    read_file(std::string file, std::string s1, std::string s2)
 	if (ifs.fail()) {
 		std::cout << "Wrong file" << std::endl;
 			ifs.close();
-		exit(1);
+		return;
 	}
-	std::ofstream			ofs(file + ".replace");
+	std::ofstream			ofs(std::string(file + ".replace").c_str());
 	while (!ifs.eof()) {
 		getline(ifs, text);
-		if ((find_nb = text.find(s1, 0)) != std::string::npos) {
+		while ((find_nb = text.find(s1, 0)) != std::string::npos) {
 			aux = text.substr(find_nb + s1.size());
 			text.erase(find_nb);
 			text += s2 + aux;

@@ -18,10 +18,12 @@ void    read_file(std::string file, std::string s1, std::string s2)
 	std::ofstream			ofs(std::string(file + ".replace").c_str());
 	while (!ifs.eof()) {
 		getline(ifs, text);
-		while ((find_nb = text.find(s1, 0)) != std::string::npos) {
+		int last = 0;
+		while ((find_nb = text.find(s1, last)) != std::string::npos) {
 			aux = text.substr(find_nb + s1.size());
 			text.erase(find_nb);
 			text += s2 + aux;
+			last = find_nb + s2.size();
 		}
 		ofs << text;
 		if (!ifs.eof())

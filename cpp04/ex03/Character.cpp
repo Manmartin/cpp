@@ -7,7 +7,7 @@ Character::Character( std::string name): _name(name) {
          _inventory[i] = 0;
 }
 
-Character::Character( Character const &other) { *this = other; }
+Character::Character( Character &other) { *this = other; }
 
 Character::~Character( void ) {
     for (int i = 0; i < 4; i++) {
@@ -19,7 +19,7 @@ Character::~Character( void ) {
 
 /* Operation Overload*/
 
-Character const &Character::operator=(Character const &other) {
+Character  &Character::operator=(Character &other) {
     _name = other._name;
     for (int i = 0; i < 4; i++)
         if (_inventory[i])

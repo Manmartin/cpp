@@ -22,10 +22,10 @@ class Character: public ICharacter {
 
     public:
         Character( std::string name );
-        Character(Character const &other);
+        Character(Character &other);
         ~Character();
 
-        Character const &operator=(Character const &other);
+        Character   &operator=(Character &other);
 
         std::string const   &getName( void ) const;
         void equip( AMateria* m );

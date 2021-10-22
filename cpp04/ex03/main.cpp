@@ -56,12 +56,13 @@ int main(void) {
     fk->equip(src->createMateria("cure"));
     fk->use(0, *og);
     std::cout << "\e[1;36mFake = Original\e[1;31m" << std::endl;
-    fk = og;
+    *(Character *)fk = *(Character *)og;
     fk->use(0, *og);
-
-
+    
+    
+    
+    delete og;
     delete fk;
-   // delete og;
     delete src;
     return 0;
 }

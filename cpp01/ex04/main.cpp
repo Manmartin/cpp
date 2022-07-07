@@ -1,49 +1,46 @@
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
 
+static void	replace( std::string file, std::string s1, std::string s2 ) {
+	std::fstream	old_file;
+	std::fstream	new_file;
+	std::string		line;
+	std::string		aux;
+	size_t			find_value;
 
-void    read_file(std::string file, std::string s1, std::string s2)
-{
-	std::ifstream   		ifs(file.c_str(), std::ios::in);
-	std::string     		text;
-	std::string     		aux;
-	unsigned long		find_nb;
-
-	if (ifs.fail()) {
-		std::cout << "Wrong file" << std::endl;
-			ifs.close();
-		return;
-	}
-	std::ofstream			ofs(std::string(file + ".replace").c_str());
-	while (!ifs.eof()) {
-		getline(ifs, text);
-		int last = 0;
-		while ((find_nb = text.find(s1, last)) != std::string::npos) {
-			aux = text.substr(find_nb + s1.size());
-			text.erase(find_nb);
-			text += s2 + aux;
-			last = find_nb + s2.size();
+	old_file.open(file.c_str(), std::ios::in);
+	new_file.open(std::string(file + ".replace").c_str(), std::ios::out);
+	if (!old_file) {
+		std::cout << "The input file could not be opened" << std::endl;
+	} else if (!new_file) {
+		std::cout << "The output file could not be opened" << std::endl;
+	} else {
+		while (getline(old_file, line)) {
+			int	last = 0;
+			while ((find_value = line.find(s1, last)) != std::string::npos) {
+				aux = line.substr(find_value + s1.size());
+				line.erase(find_value);
+				line += s2 + aux;
+				last = find_value + s2.size();
+			}
+			new_file << line;
+			if (!old_file.eof())
+				new_file << std::endl;
 		}
-		ofs << text;
-		if (!ifs.eof())
-			ofs << "\n";
 	}
-	ofs.close();
-	ifs.close();
+	old_file.close();
+	new_file.close();
 }
 
-int main(int argc, char *argv[]) {
-
-
+int main( int argc, char *argv[] ) {
 	if (argc == 4) {
-		if (!argv[2][0] || !argv[3][0]) {
+		if (!argv[2][0] || !argv[3][0])
 			std::cout << "Strings can't be empty" << std::endl;
-			return (0);
-		}
-		read_file(argv[1], argv[2], argv[3]);
+		else
+			replace(argv[1], argv[2], argv[3]);
 	}
-	else
+	else 
 		std::cout << "Wrong amount of arguments" << std::endl;
-	return (0);
+	return 0;
 }

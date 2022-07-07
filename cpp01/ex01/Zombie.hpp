@@ -3,20 +3,22 @@
 
 # include <iostream>
 # include <string>
-# include <sstream>
 
-class Zombie {
+class Zombie
+{
 	private:
+		std::string	_name;
 
-	std::string	_name;
 	public:
+		Zombie( const std::string name);
+		Zombie( void );
+		~Zombie( void );
 
-	Zombie(void);
-	~Zombie( void );
+		void	announce( void );
+		void	setName( std::string name );
 
-	void	announce( void );
-	void	setName(std::string name);
-	
 };
+
+Zombie*	zombieHorde( int N, std::string name );
 
 #endif

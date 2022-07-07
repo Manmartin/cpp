@@ -2,21 +2,17 @@
 # define WEAPON_HPP
 
 # include <iostream>
-# include <string> 
+# include <string>
 
-class Weapon {
+class Weapon
+{
 	private:
-	
-	std::string _str;
-
+		std::string	_type;
 	public:
+		Weapon( std::string type );
 
-	Weapon(std::string str);
-	~Weapon(void);
-
-	const	std::string getType(void);
-	void	setType(std::string str);
-
+		std::string const &getType( void );
+		void	setType( const std::string type );
 };
 
 #endif

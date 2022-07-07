@@ -1,15 +1,12 @@
-#include "Karen.hpp"
+#include <Karen.hpp>
 
-int main (void) {
-    Karen   karen;
-    karen.complain("1");
-    karen.complain("2");
-    karen.complain("3");
-    karen.complain("4");
+int main(void) {
+	Karen	karen;
 
+	karen.complain("DEBUG");
+	karen.complain("INFO");
+	karen.complain("WARNING");
+	karen.complain("ERROR");
 
-    karen.complain("-1");
-    karen.complain("hola");
-    karen.complain("83");
-    return(0);
+	karen.complain("Anything else");
 }

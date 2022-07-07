@@ -3,22 +3,16 @@
 
 # include <iostream>
 # include <string>
-# include <sstream>
 
 class Karen {
 	private:
-	static	void	base( void );
-	static	void	debug( void );
-	static	void	info( void );
-	static	void	warning( void );
-	static	void	error( void );
-
-	void	(*_functions[5])(void);
-
+		void	base( void );
+		void	debug( void );
+		void	info( void );
+		void	warning( void );
+		void	error( void );
 	public:
-	Karen(void);
-	~Karen(void);
-	void	complain( std::string level );
+		void	complain( std::string level );
 };
 
 #endif

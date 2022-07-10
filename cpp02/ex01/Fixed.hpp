@@ -4,22 +4,20 @@
 # include <iostream>
 # include <cmath>
 
-class Fixed {
-
+class Fixed
+{
 	private:
-
-	int 				_value;
-	static const int	_fractional_bits;
+		int					_value;
+		static const int	_fractional_bits = 8;
 
 	public:
-
 		Fixed( void );
-		~Fixed( void );
-		Fixed( Fixed const &instance );
+		Fixed( Fixed const &ref );
 		Fixed( int const value );
 		Fixed( float const value );
-
-		Fixed	&operator=( Fixed const & instance );
+		~Fixed( void );
+	
+		Fixed	&operator=( Fixed const &ref );
 
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
@@ -28,6 +26,6 @@ class Fixed {
 
 };
 
-std::ostream &operator<<( std::ostream &o, Fixed const &instance );
+std::ostream	&operator<<(std::ostream &o, Fixed const &ref);
 
 #endif

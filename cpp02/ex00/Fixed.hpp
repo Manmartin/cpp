@@ -3,23 +3,21 @@
 
 # include <iostream>
 
-class Fixed {
-
+class Fixed
+{
 	private:
-
-	int 				_value;
-	static	const int	_fractional_bits;
+		int					_value;
+		static const int	_fractional_bits = 8;
 
 	public:
-
 		Fixed( void );
+		Fixed( Fixed const &ref );
 		~Fixed( void );
-		Fixed( Fixed const &instance );
+	
+		Fixed	&operator=( Fixed const &ref );
 
-		Fixed	&operator=( Fixed const & instance );
 		int		getRawBits( void ) const;
 		void	setRawBits( int const raw );
-
 };
 
 #endif

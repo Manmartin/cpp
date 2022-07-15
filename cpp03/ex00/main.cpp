@@ -1,7 +1,7 @@
-#include "ClapTrap.hpp"
+#include <ClapTrap.hpp>
 
-int main( void ) {
-    std::cout << "[ Constructors test ]" << std::endl;
+int main(void) {
+	std::cout << "[ Constructors test ]" << std::endl;
     std::cout << std::endl;
     ClapTrap    a( "player" );
     ClapTrap    b( a );

@@ -1,82 +1,55 @@
-#include "ClapTrap.hpp"
+#include <ClapTrap.hpp>
 
-/* Static  Variables*/
-
-
-/* Constructors and Destructor */
-
-ClapTrap::ClapTrap( void ) {
-    name = "Default";
-    hitpoints = 10;
-    energy_points = 10;
-    attack_damage = 0;
-    std::cout << "ClapTrap " << name << " has been created" << std::endl;
+ClapTrap::ClapTrap( void ) : _hitpoints(10), _energy(10), _attack(0) {
+	this->_name = "Default";
+	std::cout << "ClapTrap " << this->_name << " has been created" << std::endl;
 }
 
-ClapTrap::ClapTrap( std::string name ) {
-    this->name = name;
-    hitpoints = 10;
-    energy_points = 10;
-    attack_damage = 0;
-    std::cout << "ClapTrap " << name << " has been created" << std::endl;
+ClapTrap::ClapTrap( std::string const &name ) : _hitpoints(10), _energy(10), _attack(0) {
+	this->_name = name;
+	std::cout << "ClapTrap " << this->_name << " has been created" << std::endl;
 }
 
-ClapTrap::ClapTrap( ClapTrap const &other ) {
-    *this = other;
-    std::cout << "ClapTrap " << name << " has been created" << std::endl;
+ClapTrap::ClapTrap( ClapTrap const &ref ) : _attack(0) {
+	*this = ref;
+	std::cout << "ClapTrap " << this->_name << " has been created" << std::endl;
 }
 
-ClapTrap::~ClapTrap(void) {
-    std::cout << "ClapTrap " << name << " has been completely destroyed" << std::endl;
-
+ClapTrap::~ClapTrap( void ) {
+	std::cout << "ClapTrap " << this->_name << " has been completely destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-ClapTrap const   &ClapTrap::operator=( ClapTrap const &other ) {
-    name = other.name;
-    hitpoints = other.hitpoints;
-    energy_points = other.energy_points;
-    attack_damage = other.attack_damage;
-	return other;
+ClapTrap	&ClapTrap::operator=( ClapTrap const &ref ) {
+	this->_name = ref._name;
+	this->_hitpoints = ref._hitpoints;
+	this->_energy = ref._energy;
+	return *this;
 }
 
-
-/* Member Functions */
-
-void    ClapTrap::attack( std::string const & target ) {
-    if (energy_points >= 10) {
-        energy_points -= 10;
-        std::cout << "ClapTrap " << name << " attack " << target 
-        << ", causing " << attack_damage << " points of damage!"
-        << std::endl
-        << "Remaining energy (" << name << "): " << energy_points
-        << std::endl;
-    }
-    else
-        std::cout << "ClapTrap " << name << " doesn't have enough energy points to attack"
-        << std::endl;
+void	ClapTrap::attack( std::string const &target ) const {
+	std::cout << "ClapTrap " << this->_name << " attack " << target 
+	<< ", causing " << this->_attack << " points of damage!"
+   	<< std::endl;
 }
 
-void    ClapTrap::takeDamage( unsigned int amount ) {
-    if (hitpoints == 0)
-        std::cout << name << " is already destroyed" << std::endl;
-    else if ( amount >= hitpoints) {
-        hitpoints = 0;
-        std::cout << name << " has been destroyed" << std::endl;
-    }
-    else {
-        hitpoints  -= amount;
-        std::cout << name << " takes " << amount << " points of damage!"
-            << std::endl;
-        std::cout << "Current hitpoints (" << name << "): " << hitpoints << std::endl;
-    }
+void	ClapTrap::takeDamage( unsigned int amount ) {
+	if (this->_hitpoints == 0) 
+		std::cout << "ClapTrap " << this->_name << " is already destroyed" << std::endl;
+	else if ( amount >= this->_hitpoints) {
+		this->_hitpoints = 0;
+		std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
+		std::cout << "ClapTrap " << this->_name << " has been destroyed" << std::endl;
+	}
+	else {
+		this->_hitpoints  -= amount;
+		std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
+		std::cout << "Current hitpoints (" << this->_name << "): " << this->_hitpoints << std::endl;
+	}
 }
 
-void    ClapTrap::beRepaired( unsigned int amount ) {
-    hitpoints += amount;
-    std::cout << name << " has healed " << amount << " hitpoints"
-    << std::endl
-    << "Current hitpoints (" << name << "): " << hitpoints << std::endl;
+void	ClapTrap::beRepaired( unsigned int amount ) {
+	this->_hitpoints += amount;
+	std::cout << "ClapTrap " << this->_name << " has healed " << amount << " hitpoints"
+	<< std::endl
+	<< "Current hitpoints (" << this->_name << "): " << this->_hitpoints << std::endl;
 }

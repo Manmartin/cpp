@@ -2,14 +2,21 @@ NAME = test
 
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+INC = -I ./
 
-SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS =	main.cpp \
+		ClapTrap.cpp \
+		ScavTrap.cpp
+
 OBJS = $(SRCS:.cpp=.o)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INC) -c $^ -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INC) $(OBJS) -o $@
 
 clean:
 	rm -rf $(OBJS)

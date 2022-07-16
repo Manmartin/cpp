@@ -1,52 +1,43 @@
-#include "FragTrap.hpp"
+#include <FragTrap.hpp>
 
-/* Static  Variables*/
-    const unsigned int FragTrap::life = 100;
-    const unsigned int FragTrap::energy = 100;
-    const unsigned int FragTrap::damage = 30;
-
-
-
-/* Constructors and Destructor */
-
-FragTrap::FragTrap( void ): ClapTrap() {
-    hitpoints = life;
-    energy_points = energy;
-    attack_damage = damage;
-    std::cout << "FragTrap " << name << " has been created" << std::endl;
+FragTrap::FragTrap( void ) {
+	this->_hitpoints = 100;
+	this->_energy = 100;
+	this->_attack = 30;
+	std::cout << "FragTrap " << this->_name << " has been created" << std::endl;
 }
 
-FragTrap::FragTrap( std::string name ): ClapTrap( name ) {
-    hitpoints = life;
-    energy_points = energy;
-    attack_damage = damage;
-    std::cout << "FragTrap " << name << " has been created" << std::endl;
+FragTrap::FragTrap( std::string const &name ) : ClapTrap(name) {
+	this->_hitpoints = 100;
+	this->_energy = 100;
+	this->_attack = 30;
+	std::cout << "FragTrap " << this->_name << " has been created" << std::endl;
 }
 
-FragTrap::FragTrap( FragTrap const &other ): ClapTrap( other ) {
-    *this = other;
-    std::cout << "FragTrap " << name << " has been created" << std::endl;
+FragTrap::FragTrap( FragTrap const &ref ) : ClapTrap(ref._name) {
+	*this = ref;
+	std::cout << "FragTrap " << this->_name << " has been created" << std::endl;
 }
 
 FragTrap::~FragTrap( void ) {
-    std::cout << "FragTrap " << name << " has been completely destroyed" << std::endl;
+	std::cout << "FragTrap " << this->_name << " has been completely destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-FragTrap const   &FragTrap::operator=( FragTrap const &other ) {
-    name = other.name;
-    hitpoints = other.hitpoints;
-    energy_points = other.energy_points;
-    attack_damage = other.attack_damage;
-	return other;
+FragTrap	&FragTrap::operator=( FragTrap const &ref ) {
+	this->_name = ref._name;
+	this->_hitpoints = ref._hitpoints;
+	this->_energy = ref._energy;
+	this->_attack = ref._attack;
+	return *this;
 }
 
+void	FragTrap::attack( std::string const &target ) const {
+	std::cout << "FragTrap " << this->_name << " attack " << target 
+	<< ", causing " << this->_attack << " points of damage!"
+   	<< std::endl;
+}
 
-/* Member Functions */
-
-void    FragTrap::highFives( void ) {
-    std::cout << "FragTrap " << name << " says \"High Fives!\""
-    << std::endl;
+void	FragTrap::highFivesGuys( void ) {
+	std::cout << "FragTrap " << this->_name << " says \"High Fives!\""
+	<< std::endl;
 }

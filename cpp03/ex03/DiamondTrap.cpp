@@ -1,51 +1,39 @@
-#include "DiamondTrap.hpp"
+#include <DiamondTrap.hpp>
 
-/* Static  Variables*/
-
-
-/* Constructors and Destructor */
-
-DiamondTrap::DiamondTrap( void ): ClapTrap() {
-    name = "default";
-    hitpoints = FragTrap::hitpoints;
-    energy_points = ScavTrap::energy;
-    attack_damage = FragTrap::attack_damage;
-    std::cout << "DiamondTrap " << name << " has been created" << std::endl;
+DiamondTrap::DiamondTrap( void ) : ClapTrap("default_clap_name") {
+	this->_name = "default";
+	this->_hitpoints = FragTrap::_hitpoints;
+	this->_energy = ScavTrap::_energy;
+	this->_attack = FragTrap::_attack;
+	std::cout << "DiamondTrap " << this->_name << " has been created" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( std::string name ): ClapTrap(name + "_clap_name") {
-    this->name = name;
-    hitpoints = FragTrap::hitpoints;
-    energy_points = ScavTrap::energy;
-    attack_damage = FragTrap::attack_damage;
-    std::cout << "DiamondTrap " << name << " has been created" << std::endl;
+DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name") {
+	this->_name = name;
+	this->_hitpoints = FragTrap::_hitpoints;
+	this->_energy = ScavTrap::_energy;
+	this->_attack = FragTrap::_attack;
+	std::cout << "DiamondTrap " << this->_name << " has been created" << std::endl;
 }
 
-DiamondTrap::DiamondTrap( DiamondTrap const &other ): ClapTrap( other ) {
-    *this = other;
-    std::cout << "DiamondTrap " << name << " has been created" << std::endl;
+DiamondTrap::DiamondTrap( DiamondTrap const &ref ) : ClapTrap(ref._name + "_clap_name") {
+	*this = ref;
+	std::cout << "DiamondTrap " << this->_name << " has been created" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap( void ) {
-    std::cout << "DiamondTrap " << name << " has been completely destroyed" << std::endl;
+	std::cout << "DiamondTrap " << this->_name << " has been completely destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-DiamondTrap const   &DiamondTrap::operator=( DiamondTrap const &other ) {
-    name = other.name;
-    ClapTrap::name = name + "_clap_name";
-    hitpoints = other.hitpoints;
-    energy_points = other.energy_points;
-    attack_damage = other.attack_damage;
-	return other;
+DiamondTrap	&DiamondTrap::operator=( DiamondTrap const &ref ) {
+	this->_name = ref._name;
+	this->_hitpoints = ref._hitpoints;
+	this->_energy = ref._energy;
+	this->_attack = ref._attack;
+	return *this;
 }
 
-
-/* Member Functions */
-
-void    DiamondTrap::whoAmI( void ) {
-    std::cout << "Am I " << name << " or " << ClapTrap::name << "?"
+void	DiamondTrap::whoAmI( void ) {
+	std::cout << "Am I " << this->_name << " or " << ClapTrap::_name << "?"
     << std::endl;
 }

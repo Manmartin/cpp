@@ -1,26 +1,21 @@
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#ifndef FragTrap_HPP 
+# define FragTrap_HPP
 
-#include "ClapTrap.hpp"
+#include <ClapTrap.hpp>
+#include <iostream>
+#include <string>
 
 class FragTrap: public ClapTrap {
-	private:
-
 	public:
-	/* Constructors and destructor */
-
 		FragTrap( void );
-		FragTrap( std::string name );
-		FragTrap( FragTrap const &other );
+		FragTrap( FragTrap const &ref );
+		FragTrap( std::string const &name );
 		~FragTrap( void );
 
-	/* operators overload */
+		FragTrap	&operator=( FragTrap const &ref );
 
-		FragTrap const &operator=( FragTrap const &other );
-	
-	/* member functions */
-	void	highFives( void );
-
+		void	attack( std::string const &target ) const;
+		void	highFivesGuys( void );
 };
 
 #endif

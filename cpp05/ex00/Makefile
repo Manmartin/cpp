@@ -1,16 +1,22 @@
+
 NAME = test
 
 CXX = clang++
-CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+INC = -I ./
 
-SRCS = main.cpp Bureaucrat.cpp
-HEADERS = Bureaucrat.hpp
+SRCS =	main.cpp \
+		Bureaucrat.cpp
+
 OBJS = $(SRCS:.cpp=.o)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INC) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INC) $^ -o $@
 
 clean:
 	rm -rf $(OBJS)

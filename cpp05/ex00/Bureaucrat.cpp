@@ -1,64 +1,60 @@
-#include "Bureaucrat.hpp"
+#include <Bureaucrat.hpp>
 
-
-/* Error Clases*/
-
-const char * Bureaucrat::GradeTooHighException::what() const throw(){
-    return "\e[1;31mError: Grade can't be lower than 1\e[1;0m";
+Bureaucrat::Bureaucrat( void ) : name("Lower"), grade(150) {
 }
 
-const char * Bureaucrat::GradeTooLowException::what() const throw(){
-    return "\e[1;31mError: Grade can't be greater than 150\e[1;0m";
-
+Bureaucrat::Bureaucrat( Bureaucrat const &ref ) : name(ref.name) {
+	*this = ref;
 }
 
-/* Constructors and Destructor */
-
-Bureaucrat::Bureaucrat( std::string name, unsigned int grade ): _name(name) {
-
-        if (grade > 150)
-            throw GradeTooLowException();
-        else if (grade < 1)
-            throw GradeTooHighException();
-        else
-            _grade = grade;
+Bureaucrat::Bureaucrat( std::string const &name, int grade) : name(name) {
+	if (grade < HIGHER)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > LOWER)
+		throw Bureaucrat::GradeTooLowException();
+	this->grade = grade;
 }
 
-Bureaucrat::Bureaucrat( Bureaucrat const &other ) { *this = other; }
-
-Bureaucrat::~Bureaucrat( void ) {
-}
+Bureaucrat::~Bureaucrat() {}
 
 
-/* Operators Overload */
-
-Bureaucrat const   &Bureaucrat::operator=( Bureaucrat const &other ) {
-    _grade = other._grade;
+Bureaucrat const &Bureaucrat::operator=( Bureaucrat const &ref ) {
+	this->grade = ref.grade;
 	return *this;
 }
 
 
-/* Member Functions */
-
-std::string     Bureaucrat::getName( void )  const  { return _name; }
-
-unsigned int    Bureaucrat::getGrade( void ) const  { return _grade; }
-
-void            Bureaucrat::gradeUp( void ) {
-    if (_grade == 1)
-        throw GradeTooHighException();
-    else
-        _grade--;
+std::string	const Bureaucrat::getName( void ) const {
+	return this->name;
 }
 
-void            Bureaucrat::gradeDown( void ) {
-    if (_grade == 150)
-        throw GradeTooLowException();
-    else 
-        _grade++;
+int Bureaucrat::getGrade( void ) const {
+	return this->grade;
 }
 
-std::ostream	&operator<<(std::ostream &o, Bureaucrat const &instance) {
-    o << instance.getName() << ", bureaucrat grade " << instance.getGrade();
-    return o;
+void	Bureaucrat::incrementGrade( void ) {
+	if (this->grade - 1 < HIGHER)
+		throw Bureaucrat::GradeTooHighException();
+	--this->grade;
+}
+
+void	Bureaucrat::decrementGrade( void ) {
+	if (this->grade + 1 > LOWER)
+		throw Bureaucrat::GradeTooLowException();
+	++this->grade;
+}
+
+std::ostream	&operator<<( std::ostream &o, Bureaucrat const &ref ) {
+	o << ref.getName() << ", bureaucrat grade " << ref.getGrade() << ".";
+	return o;
+}
+
+/* Errors */
+
+const char* Bureaucrat::GradeTooLowException::what() const throw(){
+	return "Grade can't be lower than 150";
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw(){
+	return "Grade can't be higher than 1";
 }

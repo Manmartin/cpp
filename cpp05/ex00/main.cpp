@@ -1,61 +1,54 @@
-#include "Bureaucrat.hpp"
+#include <Bureaucrat.hpp>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
 
 int main(void) {
-    try 
-    {
-        std::cout << "\e[1;36m[ Wrong grade text (grade = 0) ]\e[1;0m" << std::endl;
-        Bureaucrat *b = new Bureaucrat("H", 0);
-        std::cout << b << std::endl;
-    }
-    catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
-    std::cout << std::endl;
-    try 
-    {
-        std::cout << "\e[1;36m[ Wrong grade text (grade = 151) ]\e[1;0m" << std::endl;
-        Bureaucrat *b = new Bureaucrat("H", 151);
-        std::cout << b << std::endl;
-    }
-    catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
-    std::cout << std::endl;
+	std::cout << BLUE << "Creating Goods Bureaucrats\n\n" << RESET;
+	Bureaucrat min;
+	Bureaucrat max("Higher", 1);
+	std::cout << min << '\n';
+	std::cout << max << '\n';
+	std::cout << '\n';
 
+	std::cout << BLUE << "Creating Bad Bureaucrats\n\n" << RESET;
+	try {
+		Bureaucrat max("Higher", 0);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << RESET << '\n';
+	}
+	try {
+		Bureaucrat max("Lower", 151);
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << RESET << '\n';
+	}
+	std::cout << '\n';
 
-    /* First Test */
+	std::cout << BLUE << "Incrementing and decrementing beyond limits\n\n" << RESET;
+	try {
+		max.incrementGrade();
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << RESET << '\n';
+	}
+	try {
+		min.decrementGrade();
+	}
+	catch (std::exception &e) {
+		std::cerr << RED << e.what() << RESET << '\n';
+	}
+	std::cout << '\n';
 
-    std::cout << "\e[1;36m[ Creating Bureaucrat (name = Alex, grade = 1) ]\e[1;0m" << std::endl;
-    Bureaucrat *b = new Bureaucrat("Alex", 1);
-    std::cout << *b << std::endl;
-    std::cout << std::endl;
-    try 
-    {
-        std::cout << "\e[1;36m[ Wrong gradeUp text (1 -> 0) ]\e[1;0m" << std::endl;
-        b->gradeUp();
-    }
-    catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
-    std::cout << std::endl;
-    std::cout << "\e[1;36m[ Good gradeDown text (1 -> 2) ]\e[1;0m" << std::endl;
-    b->gradeDown();
-    std::cout << *b << std::endl;
-    delete b;
-
-
-    /* Second test */
-
-    std::cout << "\e[1;36m[ Creating Bureaucrat (name = Steve, grade = 150) ]\e[1;0m" << std::endl;
-    Bureaucrat *c = new Bureaucrat("Steve", 150);
-    std::cout << *c << std::endl;
-    std::cout << std::endl;
-    try 
-    {
-        std::cout << "\e[1;36m[ Wrong gradeDown text (150 -> 151) ]\e[1;0m" << std::endl;
-        c->gradeDown();
-    }
-    catch(const std::exception& e) { std::cerr << e.what() << '\n'; }
-    std::cout << std::endl;
-    std::cout << "\e[1;36m[ Good gradeUp text (150 -> 149) ]\e[1;0m" << std::endl;
-    c->gradeUp();
-    std::cout << *c << std::endl;
-
-    delete c;
-    return 0;
+	std::cout << BLUE << "Incrementing and decrementing inside limits\n\n" << RESET;
+	max.decrementGrade();
+	min.incrementGrade();
+	std::cout << min << '\n';
+	std::cout << max << '\n';
+	std::cout << '\n';
+	return 0;
 }

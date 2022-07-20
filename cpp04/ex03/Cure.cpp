@@ -1,24 +1,28 @@
-#include "includes.hpp"
+#include <Cure.hpp>
 
-/* Constructors and destructor */
-
-Cure::Cure( void ): AMateria( "cure" ) {}
-
-Cure::Cure( Cure const &other ): AMateria( other ) {}
-
-Cure::~Cure() {}
-
-
-/* Operators' overload*/ 
-
-Cure const  &Cure::operator=(Cure const &other) {
-    (void)other;
-    return  *this;
+Cure::Cure( void ) : AMateria("cure") {
+	std::cout << "Cure created" << '\n';
 }
 
+Cure::Cure( Cure const &ref ) : AMateria("cure") {
+	std::cout << "Cure created" << '\n';
+	*this = ref;
+}
 
-/* Member functions */
+Cure::~Cure( void ) {
+	std::cout << "Cure destroyed" << '\n';
+}
 
-AMateria * Cure::clone( void ) const { return new Cure(); }
+Cure const &Cure::operator=( Cure const &ref ) {
+	(void)ref;
+	return *this;
+}
 
-void    Cure::use( ICharacter& target) { std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl; }
+AMateria	*Cure::clone() const {
+	return new Cure();
+}
+
+void Cure::use(ICharacter& target) {
+	std::cout << "* heals " << target.getName() << " wounds *\n";
+}
+

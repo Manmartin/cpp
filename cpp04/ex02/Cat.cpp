@@ -1,39 +1,41 @@
-#include "Cat.hpp"
+#include <Cat.hpp>
 
-/* Constructors and Destructor */
-
-Cat::Cat( void ): Animal() {
-    type = "Cat";
-    brain = new Brain();
-    std::cout << "Cat created" << std::endl;
+Cat::Cat( void ) {
+	std::cout << "Cat created" << std::endl;
+	this->brain = new Brain();
+	this->type = "Cat";
 }
 
-Cat::Cat( Cat const &other ): Animal( other ) {
-    *this = other;
-    std::cout << "Cat created" << std::endl;
+Cat::Cat( Cat const &ref ) : Animal() {
+	std::cout << "Cat created" << std::endl;
+	this->brain = new Brain();
+	*this = ref;
 }
 
 Cat::~Cat( void ) {
-    delete  brain;
-    std::cout << "Cat destroyed" << std::endl;
+	delete this->brain;
+	std::cout << "Cat destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-Cat const   &Cat::operator=( Cat const &other ) {
-    type = other.type;
-    brain = new Brain(*other.brain);
-	return other;
+Cat const	&Cat::operator=( Cat const &ref ) {
+	this->type = ref.type;
+	*this->brain = *ref.brain;
+	return *this;
 }
 
-
-/* Member Functions */
-
-void	Cat::makeSound( void ) const{
-    std::cout << "Meow Meow" << std::endl;
+void		Cat::makeSound( void ) const {
+	std::cout << "Meow" << std::endl;
 }
 
-Brain   *Cat::getBrain( void ) const{
-    return brain;
+void	Cat::addIdea( std::string const &idea ) {
+	for (int i = 0; i < 100; i++) {
+		if (this->brain->ideas[i] == "") {
+			this->brain->ideas[i] = idea;
+			break;
+		}
+	}
+}
+
+std::string const Cat::getIdea( unsigned int n ) {
+	return	n < 100 ? this->brain->ideas[n] : std::string("");
 }

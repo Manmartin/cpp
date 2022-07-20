@@ -1,16 +1,25 @@
 NAME = test
 
 CXX = clang++
-CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+INC = -I ./
 
-SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
-HEADERS = AMateria.hpp Ice.hpp Cure.hpp Character.hpp
+SRCS =	main.cpp \
+		AMateria.cpp \
+		Ice.cpp \
+		Cure.cpp \
+		Character.cpp \
+		MateriaSource.cpp
+
 OBJS = $(SRCS:.cpp=.o)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INC) -c $^ -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(INC) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)
@@ -20,4 +29,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONNY: all clean fclean re

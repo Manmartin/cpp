@@ -1,18 +1,18 @@
 #ifndef ICE_HPP
 # define ICE_HPP
 
-#include "includes.hpp"
+# include <AMateria.hpp>
 
 class Ice: public AMateria {
-    public:
-        Ice( void );
-        Ice( Ice const & other);
-        ~Ice();
+	public:
+		Ice( void );
+		Ice( Ice const &ref );
+		~Ice();
 
-        Ice const  &operator=(Ice const &other);
+		Ice const &operator=( Ice const &ref );
 
-        AMateria    *clone( void ) const;
-        void        use( ICharacter& target );
+		AMateria* clone() const;
+		void use(ICharacter& target);
 };
 
 #endif

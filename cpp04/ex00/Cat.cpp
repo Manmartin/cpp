@@ -1,31 +1,24 @@
-#include "Cat.hpp"
+#include <Cat.hpp>
 
-/* Constructors and Destructor */
-
-Cat::Cat( void ): Animal() {
-    type = "Cat";
-    std::cout << "Cat created" << std::endl;
+Cat::Cat( void ) {
+	this->type = "Cat";
+	std::cout << "Cat created" << std::endl;
 }
 
-Cat::Cat( Cat const &other ): Animal( other ) {
-    *this = other;
-    std::cout << "Cat created" << std::endl;
+Cat::Cat( Cat const &ref ) : Animal() {
+	*this = ref;
+	std::cout << "Cat created" << std::endl;
 }
 
 Cat::~Cat( void ) {
-    std::cout << "Cat destroyed" << std::endl;
+	std::cout << "Cat destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-Cat const   &Cat::operator=( Cat const &other ) {
-    type = other.type;
-	return other;
+Cat const	&Cat::operator=( Cat const &ref ) {
+	this->type = ref.type;
+	return *this;
 }
 
-
-/* Member Functions */
-void	Cat::makeSound( void ) const{
-    std::cout << "Meow Meow" << std::endl;
+void		Cat::makeSound( void ) const {
+	std::cout << "Meow" << std::endl;
 }

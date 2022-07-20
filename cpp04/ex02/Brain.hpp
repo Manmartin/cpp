@@ -2,29 +2,16 @@
 # define BRAIN_HPP
 
 #include <iostream>
-#include <string>
 
-
-class Brain {
-	private:
-		unsigned int index;
+class Brain
+{
 	public:
-	/*  Variables */ 
 		std::string	ideas[100];
-	/* Constructors and destructor */
-
 		Brain( void );
-		Brain( Brain const &other );
+		Brain( Brain const &ref );
 		~Brain( void );
 
-	/* operators overload */
-
-		Brain const &operator=( Brain const &other );
-	
-	/* Member Functions */
-		void		addIdea( std::string idea );
-		std::string	getIdea( unsigned int i );
-		void		printIdeas( void );
+		Brain const	&operator=( Brain const &ref );
 
 };
 

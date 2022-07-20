@@ -1,24 +1,27 @@
-#include "includes.hpp"
+#include <Ice.hpp>
 
-/* Constructors and destructor */
-
-Ice::Ice( void ): AMateria( "ice" ) {}
-
-Ice::Ice( Ice const &other ): AMateria( other ) {}
-
-Ice::~Ice() {}
-
-
-/* Operators' overload*/ 
-
-Ice const  &Ice::operator=(Ice const &other) {
-    (void)other;
-    return  *this;
+Ice::Ice( void ) : AMateria("ice") {
+	std::cout << "Ice created" << '\n';
 }
 
+Ice::Ice( Ice const &ref ) : AMateria("ice") {
+	std::cout << "Ice created" << '\n';
+	*this = ref;
+}
 
-/* Member functions */
+Ice::~Ice( void ) {
+	std::cout << "Ice destroyed" << '\n';
+}
 
-AMateria * Ice::clone( void ) const { return new Ice(); }
+Ice const &Ice::operator=( Ice const &ref ) {
+	(void)ref;
+	return *this;
+}
 
-void    Ice::use( ICharacter& target) { std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl; }
+AMateria	*Ice::clone() const {
+	return new Ice();
+}
+
+void Ice::use(ICharacter& target) {
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";
+}

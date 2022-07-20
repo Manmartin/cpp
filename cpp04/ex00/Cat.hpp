@@ -1,25 +1,18 @@
 #ifndef CAT_HPP
 # define CAT_HPP
 
-# include <iostream>
-# include <string>
-# include "Animal.hpp"
+#include <Animal.hpp>
 
 class Cat: public Animal {
-	public:
-	/* Constructors and destructor */
 
+	public:
 		Cat( void );
-		Cat( Cat const &other );
+		Cat( Cat const &ref );
 		~Cat( void );
 
-	/* operators overload */
+		Cat const	&operator=( Cat const &ref );
 
-		Cat const &operator=( Cat const &other );
-	
-	/* Member Functions */
-		virtual void	makeSound( void ) const;
-	
+		void	makeSound( void ) const;
 };
 
 #endif

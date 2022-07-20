@@ -1,25 +1,18 @@
 #ifndef DOG_HPP
 # define DOG_HPP
 
-# include <iostream>
-# include <string>
-# include "Animal.hpp"
+#include <Animal.hpp>
 
 class Dog: public Animal {
-	public:
-	/* Constructors and destructor */
 
+	public:
 		Dog( void );
-		Dog( Dog const &other );
+		Dog( Dog const &ref );
 		~Dog( void );
 
-	/* operators overload */
+		Dog const	&operator=( Dog const &ref );
 
-		Dog const &operator=( Dog const &other );
-	
-	/* Member Functions */
-		virtual void	makeSound( void ) const;
-	
+		void	makeSound( void ) const;
 };
 
 #endif

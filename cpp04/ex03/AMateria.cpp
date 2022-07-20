@@ -1,28 +1,14 @@
-#include "includes.hpp"
+#include <AMateria.hpp>
 
-/* Constructor and Destructor */
-
-AMateria::AMateria( std::string const & type ): type(type) {}
-
-AMateria::AMateria ( AMateria const &other ): type(other.type) {}
-
-AMateria::AMateria( void ) {}
-
-AMateria::~AMateria( void ) {}
-
-
-/* Operators' overload */
-
-AMateria const &AMateria::operator=(AMateria const &other) {
-    (void)other;
-    return *this;
+AMateria::AMateria( std::string const & type ) {
+	std::cout << "AMateria created" << '\n';
+	this->type = type;
 }
 
-/* Functions */
+AMateria::~AMateria() {
+	std::cout << "AMateria destroyed" << '\n';
+}
 
-std::string const & AMateria::getType( void ) const { return type; }
-
-void    AMateria::use(ICharacter& target) { (void)target; }
-
-
-
+std::string const &AMateria::getType( void ) const {
+	return this->type;
+}

@@ -1,36 +1,27 @@
-#include "Animal.hpp"
+#include <Animal.hpp>
 
-/* Constructors and Destructor */
-
-Animal::Animal( void ) {
-    type = "Animal";
-    std::cout << "Animal created" << std::endl;
+Animal::Animal( void ) : type("Animal") {
+	std::cout << "Animal created" << std::endl;
 }
 
-Animal::Animal( Animal const &other ) {
-    *this = other;
-    std::cout << "Animal created" << std::endl;
+Animal::Animal( Animal const &ref ) {
+	*this = ref;
+	std::cout << "Animal created" << std::endl;
 }
 
 Animal::~Animal( void ) {
-    std::cout << "Animal destroyed" << std::endl;
+	std::cout << "Animal destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-Animal const   &Animal::operator=( Animal const &other ) {
-    type = other.type;
-	return other;
+Animal const	&Animal::operator=( Animal const &ref ) {
+	this->type = ref.type;
+	return *this;
 }
 
-
-/* Member Functions */
-
-std::string Animal::getType( void ) const{
-    return type;
+std::string const	&Animal::getType( void ) const {
+	return this->type;
 }
 
-void	Animal::makeSound( void ) const{
-    std::cout << "???????" << std::endl;
+void		Animal::makeSound( void ) const {
+	std::cout << "????????" << std::endl;
 }

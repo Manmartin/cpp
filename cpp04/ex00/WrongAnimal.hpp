@@ -1,27 +1,20 @@
 #ifndef WRONGANIMAL_HPP
 # define WRONGANIMAL_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
 
 class WrongAnimal {
 	protected:
-		std::string type;
+		std::string	type;
 	public:
-	/* Constructors and destructor */
-
 		WrongAnimal( void );
-		WrongAnimal( WrongAnimal const &other );
+		WrongAnimal( WrongAnimal const &ref );
 		~WrongAnimal( void );
 
-	/* operators overload */
+		WrongAnimal const	&operator=( WrongAnimal const &ref );
 
-		WrongAnimal const &operator=( WrongAnimal const &other );
-	
-	/* Member Functions */
-		std::string	getType( void ) const;
-		void	makeSound( void ) const;
-	
+		std::string const	&getType( void ) const;
+		void				makeSound( void ) const;
 };
 
 #endif

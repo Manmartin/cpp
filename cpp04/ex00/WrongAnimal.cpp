@@ -1,36 +1,27 @@
-#include "WrongAnimal.hpp"
+#include <WrongAnimal.hpp>
 
-/* Constructors and Destructor */
-
-WrongAnimal::WrongAnimal( void ) {
-    type = "WrongAnimal";
-    std::cout << "WrongAnimal created" << std::endl;
+WrongAnimal::WrongAnimal( void ) : type("WrongAnimal") {
+	std::cout << "WrongAnimal created" << std::endl;
 }
 
-WrongAnimal::WrongAnimal( WrongAnimal const &other ) {
-    *this = other;
-    std::cout << "WrongAnimal created" << std::endl;
+WrongAnimal::WrongAnimal( WrongAnimal const &ref ) {
+	*this = ref;
+	std::cout << "WrongAnimal created" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal( void ) {
-    std::cout << "WrongAnimal destroyed" << std::endl;
+	std::cout << "WrongAnimal destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-WrongAnimal const   &WrongAnimal::operator=( WrongAnimal const &other ) {
-    type = other.type;
-	return other;
+WrongAnimal const	&WrongAnimal::operator=( WrongAnimal const &ref ) {
+	this->type = ref.type;
+	return *this;
 }
 
-
-/* Member Functions */
-
-std::string WrongAnimal::getType( void ) const{
-    return type;
+std::string const	&WrongAnimal::getType( void ) const {
+	return this->type;
 }
 
-void	WrongAnimal::makeSound( void ) const{
-    std::cout << "???????" << std::endl;
+void		WrongAnimal::makeSound( void ) const {
+	std::cout << "!!!!!!!!!!!" << std::endl;
 }

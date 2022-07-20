@@ -1,54 +1,56 @@
-#include "includes.hpp"
+#include <Character.hpp>
 
-Character::Character( void ) {}
-
-Character::Character( std::string name): _name(name) {
-    for (int i = 0; i < 4; i++)
-         _inventory[i] = 0;
+Character::Character( void ) : inventory() {
+	std::cout << "Character created" << '\n';
+	this->name = "Default";
 }
 
-Character::Character( Character &other) { *this = other; }
-
-Character::~Character( void ) {
-    for (int i = 0; i < 4; i++) {
-        if (_inventory[i])
-            delete _inventory[i];
-    }
+Character::Character( std::string const &name ) : inventory() {
+	std::cout << "Character created" << '\n';
+	this->name = name;
 }
 
+Character::Character( Character const &ref ) : inventory() {
+	std::cout << "Character created" << '\n';
+	*this = ref;
+}
 
-/* Operation Overload*/
-
-Character  &Character::operator=(Character &other) {
-    _name = other._name;
-    for (int i = 0; i < 4; i++)
-        if (_inventory[i])
-            delete _inventory[i];
-    for (int i = 0; i < 4; i++)
-        _inventory[i] = other._inventory[i] ? other._inventory[i]->clone() : 0;
-    return *this;
+Character::~Character() {
+	for (int i = 0; i < 4; i++)
+		if (this->inventory[i] != NULL)
+			delete this->inventory[i];
+	std::cout << "Character destroyed" << '\n';
 }
 
 
-/* Member Functions */
-
-std::string const   &Character::getName( void ) const { return _name; }
-
-void    Character::equip( AMateria *m) {
-    for (int i = 0; i < 4; i++) {
-        if (!_inventory[i]) { 
-            _inventory[i] = m;
-            break;
-        }
-    }
+Character const &Character::operator=( Character const &ref ) {
+	this->name = ref.name;
+	for (int i = 0; i < 4; i++) {
+		delete this->inventory[i];
+		this->inventory[i] = ref.inventory[i] == NULL ? NULL : 	ref.inventory[i]->clone();
+	}
+	return	*this;
 }
 
-void    Character::unequip( int idx ) {
-    if (idx >= 0 && idx <= 3 && _inventory[idx])
-        _inventory[idx] = 0;
+
+std::string	const	&Character::getName( void ) const {
+	return this->name;
 }
 
-void    Character::use( int idx, ICharacter& target ) {
-        if (idx >= 0 && idx <= 3 && _inventory[idx])
-            _inventory[idx]->use(target);
+void	Character::equip( AMateria* m ) {
+	for (int i = 0; i < 4; i++)
+		if (this->inventory[i] == NULL) {
+			this->inventory[i] = m;
+			break;
+		}
+}
+
+void	Character::unequip( int idx ) {
+	if (idx >= 0 && idx <= 3 && this->inventory[idx] != NULL)
+		this->inventory[idx] = NULL;
+}
+
+void	Character::use( int idx, ICharacter& target ) {
+	if (idx >= 0 && idx <= 3 && this->inventory[idx] != NULL)
+		this->inventory[idx]->use(target); 
 }

@@ -1,31 +1,24 @@
-#include "WrongCat.hpp"
+#include <WrongCat.hpp>
 
-/* Constructors and Destructor */
-
-WrongCat::WrongCat( void ): WrongAnimal() {
-    type = "WrongCat";
-    std::cout << "WrongCat created" << std::endl;
+WrongCat::WrongCat( void ) {
+	this->type = "WrongCat";
+	std::cout << "WrongCat created" << std::endl;
 }
 
-WrongCat::WrongCat( WrongCat const &other ): WrongAnimal( other ) {
-    *this = other;
-    std::cout << "WrongCat created" << std::endl;
+WrongCat::WrongCat( WrongCat const &ref ) : WrongAnimal() {
+	*this = ref;
+	std::cout << "WrongCat created" << std::endl;
 }
 
 WrongCat::~WrongCat( void ) {
-    std::cout << "WrongCat destroyed" << std::endl;
+	std::cout << "WrongCat destroyed" << std::endl;
 }
 
-
-/* Operators Overload */
-
-WrongCat const   &WrongCat::operator=( WrongCat const &other ) {
-    type = other.type;
-	return other;
+WrongCat const	&WrongCat::operator=( WrongCat const &ref ) {
+	this->type = ref.type;
+	return *this;
 }
 
-
-/* Member Functions */
-void	WrongCat::makeSound( void ) const{
-    std::cout << "Meow Meow" << std::endl;
+void		WrongCat::makeSound( void ) const {
+	std::cout << "Woem" << std::endl;
 }

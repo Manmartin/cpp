@@ -5,6 +5,9 @@
 # define HIGHER 1
 
 # include <iostream>
+# include <Form.hpp>
+
+class Form;
 
 class Bureaucrat {
 	private:
@@ -23,6 +26,7 @@ class Bureaucrat {
 
 		void incrementGrade( void );
 		void decrementGrade( void );
+		void signForm( Form *form );
 
 		class GradeTooHighException: public std::exception {
 			public:
@@ -30,7 +34,7 @@ class Bureaucrat {
 		};
 		class GradeTooLowException: public std::exception {
 			public:
-				virtual const char* what() const throw(); 
+				virtual const char* what() const throw();
 		};
 };
 

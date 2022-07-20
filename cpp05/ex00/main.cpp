@@ -19,13 +19,13 @@ int main(void) {
 		Bureaucrat max("Higher", 0);
 	}
 	catch (std::exception &e) {
-		std::cerr << RED << e.what() << RESET << '\n';
+		std::cout << RED << e.what() << RESET << '\n';
 	}
 	try {
 		Bureaucrat max("Lower", 151);
 	}
 	catch (std::exception &e) {
-		std::cerr << RED << e.what() << RESET << '\n';
+		std::cout << RED << e.what() << RESET << '\n';
 	}
 	std::cout << '\n';
 
@@ -34,13 +34,13 @@ int main(void) {
 		max.incrementGrade();
 	}
 	catch (std::exception &e) {
-		std::cerr << RED << e.what() << RESET << '\n';
+		std::cout << RED << e.what() << RESET << '\n';
 	}
 	try {
 		min.decrementGrade();
 	}
 	catch (std::exception &e) {
-		std::cerr << RED << e.what() << RESET << '\n';
+		std::cout << RED << e.what() << RESET << '\n';
 	}
 	std::cout << '\n';
 

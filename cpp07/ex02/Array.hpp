@@ -11,7 +11,7 @@ class Array {
 				
 	public:
 		Array<T>( void ) : _size(0), _arr(new T[0]())   {}
-		Array<T>( Array<T> const &ref ) { *this = ref; } 
+		Array<T>( Array<T> const &ref ) : _arr(NULL) { *this = ref; } 
 		Array<T>( unsigned int n ) : _size(n), _arr(new T[_size]()) {}
 		~Array<T>() {delete [] this->_arr;}
 		
@@ -20,7 +20,8 @@ class Array {
 			this->_size = ref._size;
 			for (unsigned int i = 0; i < this->_size; i++)
 				tmp[i] = ref._arr[i];
-			delete [] this->_arr;
+			if (_arr)
+				delete [] this->_arr;
 			this->_arr = tmp;
 			return *this;
 		}

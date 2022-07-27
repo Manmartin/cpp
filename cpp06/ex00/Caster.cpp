@@ -49,7 +49,7 @@ std::string const &Caster::getRawValue( void ) {
 
 /* Print functions */
 
-void	Caster::printChar( int c, char const *special ) {
+void	Caster::printChar( char c, char const *special ) {
 	std::cout << "char: ";
 	if (special)
 		std::cout << "impossible";
@@ -87,7 +87,6 @@ void	Caster::printFloat( float nbf, char const *special ) {
 		std::cout << 'f';
 	}
 	std::cout << '\n';
-	
 }
 
 void	Caster::printDouble( double nbd, char const *special ) {
@@ -120,7 +119,11 @@ bool	Caster::isSpecial( std::string const &str ) {
 }
 
 bool	Caster::isException( void ) {
-	return value.nb == std::numeric_limits<double>::infinity() || value.nb == -std::numeric_limits<double>::infinity() || std::isnan(value.nb); 
+	return value.nbf == std::numeric_limits<float>::infinity() || value.nbf == -std::numeric_limits<float>::infinity() || isnan(value.nbf); 
+}
+
+bool	Caster::isExceptionD( void ) {
+	return value.nb == std::numeric_limits<double>::infinity() || value.nb == -std::numeric_limits<double>::infinity() || isnan(value.nb);
 } 
 
 /* Casts functions */
@@ -139,9 +142,27 @@ void	Caster::castFromSpecial( void ) {
 	this->printDouble(0.0, this->value.special);
 }
 
+void	Caster::castFromFloat( void ) {
+	if (value.nbf >= std::numeric_limits<char>::min() && value.nbf<= std::numeric_limits<char>::max())
+		this->printChar(static_cast<char>(this->value.nbf), NULL);
+	else
+		this->printChar(0, "noprint");
+	
+	if (value.nbf >= std::numeric_limits<int>::min() && value.nbf <= std::numeric_limits<int>::max())
+		this->printInt(static_cast<int>(this->value.nbf), NULL);
+	else
+		this->printInt(0, "noprint");
+	
+	if ((value.nbf >= -std::numeric_limits<float>::max() && value.nbf <= std::numeric_limits<float>::max()) || this->isException())
+		this->printFloat(this->value.nbf, NULL);
+	else
+		this->printFloat(0.0, "noprint");
+	this->printDouble(static_cast<double>(this->value.nbf), NULL);
+}
+
 void	Caster::castFromDouble( void ) {
 	if (value.nb >= std::numeric_limits<char>::min() && value.nb <= std::numeric_limits<char>::max())
-		this->printChar(static_cast<int>(this->value.nb), NULL);
+		this->printChar(static_cast<char>(this->value.nb), NULL);
 	else
 		this->printChar(0, "noprint");
 	
@@ -150,7 +171,7 @@ void	Caster::castFromDouble( void ) {
 	else
 		this->printInt(0, "noprint");
 	
-	if ((value.nb >= -std::numeric_limits<float>::max() && value.nb <= std::numeric_limits<float>::max()) || this->isException())
+	if ((value.nb >= -std::numeric_limits<float>::max() && value.nb <= std::numeric_limits<float>::max()) || this->isException() || this->isExceptionD())
 		this->printFloat(static_cast<float>(this->value.nb), NULL);
 	else
 		this->printFloat(0.0, "noprint");
@@ -176,14 +197,24 @@ void	Caster::castValue( void ) {
 		this->value.special = this->_rawValue.c_str();
 	} else {
 		this->value.nb = strtod(this->_rawValue.c_str(), &end);
-		if (end != this->_rawValue.c_str() && (*end == '\0' || ( strlen(end) == 1 && *end == 'f' )) && this->value.nb != HUGE_VAL)
-			this->type = DOUBLE;
+		if (end != this->_rawValue.c_str() && (*end == '\0' || ( strlen(std::string(end)) == 1 && *end == 'f' )) && this->value.nb != HUGE_VAL)
+		{
+			if (strlen(std::string(end)) == 1 && *end == 'f') {
+				this->value.nbf = static_cast<float>(this->value.nb);
+				this->type = FLOAT;
+			}
+			else
+				this->type = DOUBLE;
+		}
 		else
 			this->type = ERROR;
 	}
 	switch (this->type) {
 		case CHAR:
 			castFromChar();
+			break;
+		case FLOAT:
+			castFromFloat();
 			break;
 		case DOUBLE:
 			castFromDouble();

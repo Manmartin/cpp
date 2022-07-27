@@ -12,10 +12,11 @@ class Caster {
 		static const char *special[7]; 
 		union {
 			char	c;
+			float	nbf;
 			double	nb;
 			const char	*special;
 		} value;
-		enum { CHAR, DOUBLE, SPECIAL, ERROR } type;
+		enum { CHAR, FLOAT, DOUBLE, SPECIAL, ERROR } type;
 	public:
 		Caster( void );
 		Caster( Caster const &ref );
@@ -29,14 +30,16 @@ class Caster {
 
 		bool	isSpecial( std::string const &ref );
 		bool	isException( void );
+		bool	isExceptionD( void );
 
-		void	printChar( int c, char const *special );
+		void	printChar( char c, char const *special );
 		void	printInt( int nb, char const *special );
 		void	printFloat( float nbf, char const *special );
 		void	printDouble( double nbd, char const *special );
 		
 
 		void	castFromChar( void );
+		void	castFromFloat( void );
 		void	castFromDouble( void );
 		void	castFromSpecial( void );
 		void	castError( void );

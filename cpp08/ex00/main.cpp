@@ -76,7 +76,7 @@ int main(void) {
     {
         std::cout << BLUE << "Int deque\n\n";
         std::deque<int> v1(10, 7);
-        if ( easyfind(v1, 5) != v1.end()) 
+        if (easyfind(v1, 5) != v1.end()) 
             std::cout << GREEN << *easyfind(v1, 5) <<"\n";
         else
             std::cout << YELLOW << "didn't find it\n";
@@ -90,14 +90,14 @@ int main(void) {
         std::cout << '\n';
     {
         std::cout << BLUE << "Int deque empty\n\n";
-        std::list<int> v1;
+        std::deque<int> v1;
         if ( easyfind(v1, 5) != v1.end()) 
             std::cout << GREEN << *easyfind(v1, 5) <<"\n";
         else
             std::cout << YELLOW << "didn't find it\n";
         std::cout << RESET;
         if ((easyfind(v1, 10)) != v1.end()) 
-            std::cout << GREEN << *easyfind(v1, 10) <<"\n";
+            std::cout << GREEN << *easyfind(v1, 10) << "\n";
         else
             std::cout << YELLOW << "didn't find it\n";
         std::cout << RESET;

@@ -3,32 +3,32 @@
 
 # include <iostream>
 # include <fstream>
-# include <vector>
-# include <stdlib.h>
+# include <map>
+# include <stdint.h>
 
 class BitcoinExchange
 {
     private:
-        typedef struct s_data {
-            unsigned int date;
-            float       value;
-        } t_data ;
+        BitcoinExchange( BitcoinExchange const &ref );
+        BitcoinExchange &operator=( BitcoinExchange const &ref );
 
-        std::vector<t_data> _dbLines;
-        std::vector<std::string> _inputLines;
+        typedef std::map<uint32_t, float> databaseMap;
+        typedef std::pair<uint32_t, float>  databasePair;
+        databaseMap database;
+        std::ifstream inputFile;
 
-        unsigned int readDate( const std::string source );
-        float   searchDate( const float date, unsigned low, unsigned high );
+        bool    checkDate( uint32_t year, uint32_t month, uint32_t day );
+        bool    parseDate( uint32_t *date, const std::string source );
         bool    parseNumber( float *n, const char *str );
+    
+        float   searchDate( const uint32_t &date );
 
     public:
         BitcoinExchange();
-        BitcoinExchange( BitcoinExchange const &ref );
         ~BitcoinExchange();
-
-        BitcoinExchange &operator=( BitcoinExchange const &ref );
-
-        bool    loadFile( const char *const fileName );
+        
+        bool    loadDatabase( void );
+        bool    loadInput( const char *const filename );
         void    printValues( void );
 };
 

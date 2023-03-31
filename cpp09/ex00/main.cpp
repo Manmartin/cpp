@@ -5,8 +5,11 @@ int main(int argc, char *argv[]) {
 		std::cout << "Wrong parameters number\n";
 		return 1;
 	}
+
 	BitcoinExchange btc;
-	if (!btc.loadFile(argv[1]))
+	if (!btc.loadDatabase())
+		return 1;
+	if (!btc.loadInput(argv[1]))
 		return 1;
 	btc.printValues();
 	return 0;

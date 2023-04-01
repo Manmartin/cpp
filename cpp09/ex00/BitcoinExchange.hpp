@@ -3,8 +3,8 @@
 
 # include <iostream>
 # include <fstream>
+# include <cstdint>
 # include <map>
-# include <stdint.h>
 
 class BitcoinExchange
 {

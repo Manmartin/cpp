@@ -60,7 +60,7 @@ void    PmergeMe::getK( void ) {
         aux.resize(i + 1);
         std::copy(original.begin(), original.begin() + i + 1, aux.begin());
         this->k = i;
-        for (uint32_t j = 1; j <= 1000; j++) {
+        for (uint32_t j = 1; j <= 100; j++) {
             v1 = aux;
             v2 = aux;
             v1Time = tryInsertion(v1, i);
@@ -92,25 +92,41 @@ double PmergeMe::BenchmarkVec( void ) {
     mergeInsertionSortVec(vec, 0, right);
     gettimeofday(&end, 0);
 
-    uint64_t seconds = end.tv_sec - begin.tv_sec;
-    uint64_t microseconds = end.tv_usec - begin.tv_usec;
+    double seconds = end.tv_sec - begin.tv_sec;
+    double microseconds = end.tv_usec - begin.tv_usec;
+    double elapsed = seconds + microseconds*1e-6;
+    return elapsed;
+}
+
+double PmergeMe::BenchmarkList( void ) {
+    uint32_t right = list.size() - 1;
+    struct timeval begin, end;
+
+    gettimeofday(&begin, 0);
+    mergeSortList(list, 0, right);
+    gettimeofday(&end, 0);
+
+    double seconds = end.tv_sec - begin.tv_sec;
+    double microseconds = end.tv_usec - begin.tv_usec;
     double elapsed = seconds + microseconds*1e-6;
     return elapsed;
 }
 
 void    PmergeMe::makeBenchmark( void ) {
-    double vecTime;
+    double vecTime, listTime;
     std::cout << std::left;
     std::cout << std::setw(9) << "before:";
     this->printNumbers(vec);
 
     vecTime = this->BenchmarkVec();
+    listTime = this->BenchmarkList();
+
     std::cout << std::setw(9) << "after:";
-    this->printNumbers(vec);
+    this->printNumbers(list);
 
     std::cout << std::right;
     std::cout << "Time to process a range of " << std::setw(4) << vec.size() 
     << " elements with std::vector : " << std::fixed << std::setprecision(6) << vecTime << " s\n";
     std::cout << "Time to process a range of " << std::setw(4) << list.size()
-    << " elements with std::list   : " << vecTime << " s\n";
+    << " elements with std::list   : " << std::fixed << std::setprecision(6) << listTime << " s\n";
 }

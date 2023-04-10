@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
         sort.getK();
         i = 2;
     }
+
     for (; i < argc; i++) {
         if (!sort.addNumber(argv[i])) {
             std::cout << "Error\n";

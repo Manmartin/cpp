@@ -31,8 +31,17 @@ bool    PmergeMe::addNumber( const char *numberStr ) {
 }
 
 void    PmergeMe::printNumbers( vector &v ) {
-    std::vector<int32_t>::iterator it = v.begin();
-    std::vector<int32_t>::iterator end = --v.end();
+    vit it = v.begin();
+    vit end = --v.end();
+    for (; it != end; it++) {
+        std::cout << *it << ' ';
+    }
+    std::cout << *it << '\n';
+}
+
+void    PmergeMe::printNumbers( lst &l ) {
+    lit it = l.begin();
+    lit end = --l.end();
     for (; it != end; it++) {
         std::cout << *it << ' ';
     }

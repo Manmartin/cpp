@@ -1,11 +1,13 @@
 NAME = PmergeMe
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -O3
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp \
        PmergeMe.cpp \
 	   PmergeBenchmark.cpp \
-	   PmergeVector.cpp
+	   PmergeVector.cpp \
+	   PmergeList.cpp
+
 OBJS = $(SRCS:.cpp=.o)
 
 RM = rm -fr
@@ -22,7 +24,7 @@ fclean: clean
 	
 re: fclean all
 
-debug: CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 -fsanitize=address
+debug: CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3 #-fsanitize=address
 debug: all
 
 .PHONY: all clean fclean re

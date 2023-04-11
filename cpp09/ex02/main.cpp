@@ -9,14 +9,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int i = 1;
     PmergeMe sort;
-    if (argv[1] == std::string("--optimize")) {
-        sort.getK();
-        i = 2;
-    }
-
-    for (; i < argc; i++) {
+    for (int i = 1 ; i < argc; i++) {
         if (!sort.addNumber(argv[i])) {
             std::cout << "Error\n";
             return 1;

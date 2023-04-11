@@ -39,10 +39,6 @@ class PmergeMe
         void    mergeInsertionSortList( lst &l, uint32_t left, uint32_t right );
         double  BenchmarkList( void );
 
-        double tryInsertion( vector &v, int32_t right );
-        double tryMerge( vector &v, int32_t right );
-
-
     public:
         PmergeMe();
         ~PmergeMe();

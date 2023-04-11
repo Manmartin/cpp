@@ -52,14 +52,14 @@ void    PmergeMe::getK( void ) {
     int bestK = 0;
     int timesInARow = 0;
     int timesMergeBestThanMI;
-    std::cout << YELLOW << "Starting benchmark...\n" << RESET;
+    std::cout << YELLOW << "Starting vector benchmark...\n" << RESET;
     for (uint32_t i = 2; i <= n; i++) {
         timesMergeBestThanMI = 0;
         v1Time = 0;
         v2Time = 0;
         aux.resize(i + 1);
         std::copy(original.begin(), original.begin() + i + 1, aux.begin());
-        this->k = i;
+        this->kVec = i;
         for (uint32_t j = 1; j <= 100; j++) {
             v1 = aux;
             v2 = aux;
@@ -76,12 +76,12 @@ void    PmergeMe::getK( void ) {
             break;
         }
     }
-    this->k = bestK / 10 * 10;
+    this->kVec = bestK / 10 * 10;
     std::cout << BLUE << "Benchmark ended\n\n" << RESET;
     if (bestK == 0)
         std::cout << RED << "Merge is non optimal\n" << RESET;
     else
-        std::cout << GREEN << "The most optimal K-value = " << this->k << "\n" << RESET;
+        std::cout << GREEN << "The most optimal K-value = " << this->kVec << "\n" << RESET;
 }
 
 double PmergeMe::BenchmarkVec( void ) {
@@ -103,7 +103,7 @@ double PmergeMe::BenchmarkList( void ) {
     struct timeval begin, end;
 
     gettimeofday(&begin, 0);
-    mergeSortList(list, 0, right);
+    mergeInsertionSortList(list, 0, right);
     gettimeofday(&end, 0);
 
     double seconds = end.tv_sec - begin.tv_sec;

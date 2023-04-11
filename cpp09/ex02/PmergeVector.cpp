@@ -37,18 +37,18 @@ void    PmergeMe::mergeVec( vector &v, uint32_t left, uint32_t mid, uint32_t rig
 void    PmergeMe::mergeSortVec( vector &v, uint32_t left, uint32_t right ) {
     if (left >= right)
         return ;
-    uint16_t mid = (right + left) / 2;
+    uint32_t mid = (right + left) / 2;
     mergeSortVec(v, left, mid);
     mergeSortVec(v, mid + 1, right);
     mergeVec(v, left, mid, right);
 }
 
 void    PmergeMe::mergeInsertionSortVec( vector &v, uint32_t left, uint32_t right ) {
-    if (right - left < this->k) {
+    if (right - left < this->kVec) {
         insertionSortVec(v, left, right);
         return ;
     }
-    uint16_t mid = (right + left) / 2;
+    uint32_t mid = (right + left) / 2;
     mergeInsertionSortVec(v, left, mid);
     mergeInsertionSortVec(v, mid + 1, right);
     mergeVec(v, left, mid, right);

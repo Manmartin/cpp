@@ -18,8 +18,9 @@ class PmergeMe
         typedef lst::iterator           lit;
 
         vector  vec;
-        uint32_t k;
+        uint32_t kVec;
         lst     list;
+        uint32_t kList;
 
         void    printNumbers( vector &v );
         void    printNumbers( lst &l );
@@ -35,6 +36,7 @@ class PmergeMe
         void    insertionSortList( lst &l, lit left, lit right );
         void    mergeList( lst &l, lit left, lit mid, lit right );
         void    mergeSortList( lst &l, uint32_t left, uint32_t right );
+        void    mergeInsertionSortList( lst &l, uint32_t left, uint32_t right );
         double  BenchmarkList( void );
 
         double tryInsertion( vector &v, int32_t right );

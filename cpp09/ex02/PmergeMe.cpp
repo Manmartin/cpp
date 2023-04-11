@@ -5,7 +5,11 @@
 
 /* Constructor and Destructor */
 
-PmergeMe::PmergeMe() { this->k = 42; }
+PmergeMe::PmergeMe() { 
+    this->kVec = 42;
+    this->kList = 42;
+}
+
 PmergeMe::PmergeMe( PmergeMe const &ref ) { *this = ref; }
 PmergeMe::~PmergeMe() {}
 
@@ -14,6 +18,8 @@ PmergeMe::~PmergeMe() {}
 PmergeMe    &PmergeMe::operator=( PmergeMe const &ref ) {
     this->vec = ref.vec;
     this->list = ref.list;
+    this->kVec = ref.kVec;
+    this->kList = ref.kList;
     return *this;
 }
 

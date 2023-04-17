@@ -73,7 +73,7 @@ void    BitcoinExchange::printValues( void ) {
             std::cout << line.substr(0, 11)
             << " => " << value
             << " = " << searchDate(date) * value
-            << "\n";
+            << '\n';
         }
     }
 }
@@ -135,5 +135,7 @@ bool    BitcoinExchange::parseNumber( float *n, const char *str ) {
 
 float    BitcoinExchange::searchDate( const uint32_t &date ) {
     databaseMap::iterator databaseDate = database.lower_bound(date);
+    if (date <= database.begin()->first)
+        return database.begin()->second;
     return databaseDate->first == date ? databaseDate->second : (--databaseDate)->second;
 }
